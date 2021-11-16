@@ -7,23 +7,41 @@ interface PlayerGridProps {
 }
 
 export class PlayerGrid extends Component<PlayerGridProps> {
+
+    getColor(x: number, y: number): string {
+        let cs = this.props.player.map[x][y];
+        if (cs === CellStatus.water)
+            return 'bg-blue-300';
+        else if (cs === CellStatus.hit)
+            return 'bg-red-100';
+        else if (cs === CellStatus.destroyed)
+            return 'bg-red-300';
+        else if (cs === CellStatus.miss)
+            return 'bg-gray-300';
+        else if (cs === CellStatus.ship)
+            return 'bg-blue-900';
+
+
+        return 'bg-blue-300';
+    }
+
     render(): ReactNode {
         let py = -1;
         let px = -1;
-        let qwe = this.props.player.map.map(x => {
+        let grid = this.props.player.map.map(x => {
             py++;
             px = -1;
             return <div key={`${px},${py}`} className='flex'>
                 {
                     x.map(y => {
                         px++;
-                        return <div key={`${px},${py}`} id={`${px},${py}`} className={`space-x-5 border border-gray-500 flex justify-center items-center bg-blue-300 ${this.props.player.map[px][py] == CellStatus.ship ? "bg-purple-500" : ""}`} style={{ width: "40px", height: "40px" }}>{this.props.player.map[px][py]}</div>;
+                        return <div key={`${px},${py}`} id={`${px},${py}`} className={`transition space-x-5 border border-gray-500 flex justify-center items-center  ${this.getColor(px, py)}`} style={{ width: "40px", height: "40px" }}></div>;
                     })
                 }</div>
         });
         return (
             <div>
-                {qwe}
+                {grid}
             </div>
         )
     }

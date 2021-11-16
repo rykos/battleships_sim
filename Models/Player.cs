@@ -12,6 +12,7 @@ namespace battleships.Models
         Vector2 shipPos = null;
         Vector2 lastHit = null;
         Vector2 shotDir = null;
+        Vector2 origShotDir = null;
 
         public Player()
         {
@@ -58,8 +59,10 @@ namespace battleships.Models
                 this.shotDir = Vector2.NextDirection(this.shotDir);
                 if (this.shotDir == null)
                 {
-                    shipPos = null;
-                    return this.SelectRandomValidCell();
+                    this.lastHit = this.shipPos;
+                    this.origShotDir = Vector2.NextDirection(origShotDir);
+                    this.shotDir = this.origShotDir;
+                    // return this.SelectRandomValidCell();
                 }
                 shotPos = this.lastHit + this.shotDir;
             }
@@ -74,14 +77,13 @@ namespace battleships.Models
                 ///Ship detected
                 this.shipPos = shotPosition;
                 this.shotDir = Vector2.Directions[0];
+                this.origShotDir = this.shotDir;
             }
             else if (shipPos != null && cs == CellStatus.water)
             {
                 //Missed next part of ship
                 this.lastHit = this.shipPos;
-                this.shotDir = Vector2.NextDirection(shotDir);
-                if (shotDir == null)
-                    shipPos = null;
+                this.shotDir = Vector2.Directions[0];
             }
             else if (shipPos != null && cs == CellStatus.destroyed)
             {
