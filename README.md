@@ -2,8 +2,8 @@
 Battleship game simulation between 2 bots.
 .Net5 backend, React frontend
 
-[screen1](gitimg/1.png)
-[screen2](gitimg/2.png)
+![screen1](gitimg/1.png)
+![screen2](gitimg/2.png)
 
 ### Rules
  - Ships cannot be placed adjacent to each other
