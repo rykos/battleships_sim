@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace battleships.Models
 {
     public class GameLog

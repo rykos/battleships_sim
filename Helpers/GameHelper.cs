@@ -7,8 +7,6 @@ namespace battleships.helpers
 {
     public class GameHelper : IGameHelper
     {
-        private Random rnd = new Random();
-
         public GameLog RunGame()
         {
             Player p1 = new Player();

@@ -85,26 +85,28 @@ class App extends Component<{}, { game: Game | undefined }> {
     let content;
     if (this.state.game) {
       if (this.state.game.finished)
-        result = <div className='flex text-2xl items-center'>player {this.state.game.p1.turns.length > this.state.game.p2.turns.length ? "1" : "2"} wins</div>
+        result = <div className='flex text-2xl items-center' style={{minWidth: "140px"}}>player {this.state.game.p1.turns.length > this.state.game.p2.turns.length ? "1" : "2"} wins</div>
       content = <Fragment>
-        <div>
-          <div className='text-2xl text-center'>Player 1</div>
+        <div className='player-grid-container'>
+          <div>Player 1</div>
           <PlayerGrid player={this.state.game?.p1}></PlayerGrid>
         </div>
         {result}
-        <div>
-          <div className='text-2xl text-center'>Player 2</div>
+        <div className='player-grid-container'>
+          <div>Player 2</div>
           <PlayerGrid player={this.state.game?.p2}></PlayerGrid>
         </div>
       </Fragment>
     }
     return (
-      <div className='flex flex-col p-10'>
-        <div className='flex justify-between'>
-          {content}
-        </div>
-        <div className='flex justify-center mt-5' style={{ height: "50px" }}>
-          <div className='cursor-pointer bg-blue-400 rounded flex justify-center items-center w-1/6' onClick={() => { this.restartClicked(); }}>Again</div>
+      <div className='flex justify-center'>
+        <div className='flex flex-col p-10' style={{ width: "1200px" }}>
+          <div className='flex justify-between'>
+            {content}
+          </div>
+          <div className='flex justify-center mt-5 text-xl' style={{ height: "50px" }}>
+            <div className='restart-button' onClick={() => { this.restartClicked(); }}>Again</div>
+          </div>
         </div>
       </div>
     )

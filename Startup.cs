@@ -35,10 +35,6 @@ namespace battleships_sim
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "battleships_sim", Version = "v1" });
             });
 
-            // services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            // {
-            //     builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-            // }));
             services.AddCors(o =>
             {
                 o.AddDefaultPolicy(b =>
@@ -63,7 +59,6 @@ namespace battleships_sim
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
 
             app.UseAuthorization();
 

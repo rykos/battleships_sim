@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace battleships.Models
 {
     public class Player
     {
-        public Map map = new Map();
         Random rnd = new Random();
+        public Map map = new Map();
         public int shipsLeft = 0;
         Vector2 shipPos = null;
         Vector2 lastHit = null;
@@ -100,7 +99,7 @@ namespace battleships.Models
             {
                 this.map.grid[pos.X][pos.Y] = CellStatus.destroyed;
                 this.shipsLeft--;
-                if (Sunk(pos))
+                if (ShipSunk(pos))
                     return CellStatus.destroyed;
                 else
                     return CellStatus.ship;
@@ -108,9 +107,9 @@ namespace battleships.Models
             return CellStatus.water;
         }
 
-        private bool Sunk(Vector2 pos)
+        private bool ShipSunk(Vector2 shipPos)
         {
-            Vector2 curPos = pos;
+            Vector2 curPos = shipPos;
             Vector2 dir = Vector2.Directions[0];
             int i = 0;
             while (true)
@@ -121,7 +120,7 @@ namespace battleships.Models
                     //Break if checked all directions
                     if (i == 3)
                         break;
-                    curPos = pos;
+                    curPos = shipPos;
                     //change seeking direction
                     i++;
                     dir = Vector2.Directions[i];

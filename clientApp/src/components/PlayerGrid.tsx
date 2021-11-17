@@ -35,7 +35,7 @@ export class PlayerGrid extends Component<PlayerGridProps> {
                 {
                     x.map(y => {
                         px++;
-                        return <div key={`${px},${py}`} id={`${px},${py}`} className={`transition space-x-5 border border-gray-500 flex justify-center items-center  ${this.getColor(px, py)}`} style={{ width: "40px", height: "40px" }}></div>;
+                        return <div key={`${px},${py}`} id={`${px},${py}`} className={`player-grid  ${this.getColor(px, py)}`} style={{ width: "40px", height: "40px" }}></div>;
                     })
                 }</div>
         });

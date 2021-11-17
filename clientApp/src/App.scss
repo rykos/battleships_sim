@@ -1,4 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
+.restart-button{
+    @apply cursor-pointer bg-blue-400 rounded flex justify-center items-center transition w-1/6;
+}
+
+.restart-button:hover{
+    @apply bg-blue-500;
+}
+
+.player-grid-container{
+    @apply text-2xl text-center;
+}
+
+.player-grid{
+    @apply transition space-x-5 border border-gray-500 flex justify-center items-center;
+}
