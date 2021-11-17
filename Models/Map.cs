@@ -14,13 +14,15 @@ namespace battleships.Models
             this.shootingGrid = this.CreateEmptyGrid();
         }
 
-        private CellStatus[][] CreateEmptyGrid()
+        public int GetSize() => this.grid?.GetLength(0) ?? -1;
+
+        private CellStatus[][] CreateEmptyGrid(int size = 10)
         {
-            CellStatus[][] res = new CellStatus[10][];
-            for (int i = 0; i < 10; i++)
+            CellStatus[][] res = new CellStatus[size][];
+            for (int i = 0; i < size; i++)
             {
-                res[i] = new CellStatus[10];
-                for (int j = 0; j < 10; j++)
+                res[i] = new CellStatus[size];
+                for (int j = 0; j < size; j++)
                 {
                     res[i][j] = CellStatus.water;
                 }
@@ -78,7 +80,7 @@ namespace battleships.Models
             }
             return pos;
         }
-        
+
         public bool ColIsValidTarget(CellStatus[] col)
         {
             if (col.FirstOrDefault(x => x == CellStatus.water) != default)

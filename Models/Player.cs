@@ -139,9 +139,10 @@ namespace battleships.Models
         {
             int[] ships = new int[] { 5, 4, 3, 3, 2 };
             int i = ships.Length - 1;
+            int size = map.GetSize();
             while (i >= 0)
             {
-                if (map.PlaceShip(new Vector2(rnd.Next(0, 10), rnd.Next(0, 10)), ships[i], Vector2.RandomDirection()))
+                if (map.PlaceShip(new Vector2(rnd.Next(0, size), rnd.Next(0, size)), ships[i], Vector2.RandomDirection()))
                 {
                     this.shipsLeft += ships[i];
                     i--;

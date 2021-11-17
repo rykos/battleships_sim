@@ -1,48 +1,33 @@
 import { Component, ReactNode } from "react";
-import { CellStatus } from "../models/CellStatus";
 import { Player } from "../models/Player";
+import { GameGrid } from "./GameGrid";
 
 interface PlayerGridProps {
     player: Player;
+    name: string;
 }
-
 export class PlayerGrid extends Component<PlayerGridProps> {
-
-    getColor(x: number, y: number): string {
-        let cs = this.props.player.map[x][y];
-        if (cs === CellStatus.water)
-            return 'bg-blue-300';
-        else if (cs === CellStatus.hit)
-            return 'bg-red-100';
-        else if (cs === CellStatus.destroyed)
-            return 'bg-red-300';
-        else if (cs === CellStatus.miss)
-            return 'bg-gray-300';
-        else if (cs === CellStatus.ship)
-            return 'bg-blue-900';
-
-
-        return 'bg-blue-300';
-    }
-
     render(): ReactNode {
-        let py = -1;
-        let px = -1;
-        let grid = this.props.player.map.map(x => {
-            py++;
-            px = -1;
-            return <div key={`${px},${py}`} className='flex'>
-                {
-                    x.map(y => {
-                        px++;
-                        return <div key={`${px},${py}`} id={`${px},${py}`} className={`player-grid  ${this.getColor(px, py)}`} style={{ width: "40px", height: "40px" }}></div>;
-                    })
-                }</div>
-        });
-        return (
-            <div>
-                {grid}
-            </div>
-        )
+        let yaxis = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let xaxis = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        if (this.props.player)
+            return (
+                <div className='player-grid-container'>
+                    <div className='flex'>
+                        {xaxis.map(x => {
+                            return <div key={x} style={{ width: "40px", height: "40px" }}>{x}</div>;
+                        })}
+                    </div>
+                    <div className='flex'>
+                        <div className='flex flex-col'>
+                            {yaxis.map(x => {
+                                return <div key={x} style={{ width: "40px", height: "40px" }}>{x}</div>;
+                            })}
+                        </div>
+                        <GameGrid player={this.props.player}></GameGrid>
+                    </div>
+                    <div>{this.props.name}</div>
+                </div>
+            )
     }
 }

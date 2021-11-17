@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.scss';
+import { GameGrid } from './components/GameGrid';
 import { PlayerGrid } from './components/PlayerGrid';
 import { CellStatus } from './models/CellStatus';
 import { Game } from './models/Game';
@@ -85,17 +86,11 @@ class App extends Component<{}, { game: Game | undefined }> {
     let content;
     if (this.state.game) {
       if (this.state.game.finished)
-        result = <div className='flex text-2xl items-center' style={{minWidth: "140px"}}>player {this.state.game.p1.turns.length > this.state.game.p2.turns.length ? "1" : "2"} wins</div>
+        result = <div className='flex text-2xl items-center' style={{ minWidth: "140px" }}>player {this.state.game.p1.turns.length > this.state.game.p2.turns.length ? "1" : "2"} wins</div>
       content = <Fragment>
-        <div className='player-grid-container'>
-          <div>Player 1</div>
-          <PlayerGrid player={this.state.game?.p1}></PlayerGrid>
-        </div>
+        <PlayerGrid player={this.state.game?.p1} name='Player 1'></PlayerGrid>
         {result}
-        <div className='player-grid-container'>
-          <div>Player 2</div>
-          <PlayerGrid player={this.state.game?.p2}></PlayerGrid>
-        </div>
+        <PlayerGrid player={this.state.game?.p2} name='Player 2'></PlayerGrid>
       </Fragment>
     }
     return (
